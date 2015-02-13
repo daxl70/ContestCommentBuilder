@@ -1,0 +1,1092 @@
+<!doctype html>
+<!--
+ This page is shown when the extension button is clicked, because the
+ "browser_action" field in manifest.json contains the "default_popup" key with
+ value "popup.html".
+ -->
+<html>
+  <head>
+    <title>r/RealMadrid Contest comment builder</title>
+    <style>
+   table {
+  font-family: "Helvetica Neue", Helvetica, sans-serif
+}
+
+
+caption {
+  text-align: left;
+  color: silver;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 5px;
+}
+
+thead {
+  background: SteelBlue;
+  color: white;
+}
+
+th,
+td {
+  padding: 5px 10px;
+}
+
+tbody tr:nth-child(even) {
+  background: WhiteSmoke;
+}
+
+tbody tr td:nth-child(2) {
+  text-align:center;
+}
+
+tbody tr td:nth-child(3),
+tbody tr td:nth-child(4) {
+  text-align: right;
+  font-family: monospace;
+}
+
+tfoot {
+  background: SeaGreen;
+  color: white;
+  text-align: right;
+}
+
+tfoot tr th:last-child {
+  font-family: monospace;
+}
+   
+	  
+.main{
+	width:1650px;
+	position:relative;
+}
+
+.left_panel {
+	height:800px;
+	margin:0 auto;
+    width:550px;
+    float:left;
+	border:solid 1px gray;
+	overflow-y: scroll;
+	
+}
+
+.right_panel{
+    
+	float:left;
+	width:550px;
+	border:solid 1px gray;
+	
+}
+
+.comment_panel{
+    
+	float:left;
+}
+
+body,html{height:100%;}
+
+
+
+    </style>
+
+    <!--
+      - JavaScript and HTML must be in separate files: see our Content Security
+      - Policy documentation[1] for details and explanation.
+      -
+      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
+     -->
+
+	<script src="script.js"></script>
+	
+  </head>
+  <body>
+  <h1> r/RealMadrid Contest Comment Generator </h1>
+	<br>
+	
+	
+	<div class="main">
+		<div class="left_panel">
+			<table width="520px">
+			<thead>
+				<tr>
+					<th>
+						Points
+					</th>
+					<th>
+						Prediction
+					</th>
+					<th>
+						Who
+					</th>
+					<th>
+						Add
+					</th>
+				</tr>
+				
+				</thead>
+				<tr>
+					<td>
+						6
+					</td>
+					<td>
+						Stoppage Time Goal
+					</td>
+					<td>
+						<select>
+							<option value="Iker Casillas">Iker Casillas</option>
+							<option value="Raphaël Varane">Raphaël Varane</option>
+							<option value="Pepe">Pepe</option>
+							<option value="Sergio Ramos">Sergio Ramos</option>
+							<option value="Fábio Coentrão">Fábio Coentrão</option>
+							<option value="Sami Khedira">Sami Khedira</option>
+							<option value="Cristiano Ronaldo">Cristiano Ronaldo</option>
+							<option value="Toni Kroos">Toni Kroos</option>
+							<option value="Karim Benzema">Karim Benzema</option>
+							<option value="James Rodríguez">James Rodríguez</option>
+							<option value="Gareth Bale">Gareth Bale</option>
+							<option value="Marcelo">Marcelo</option>
+							<option value="Keylor Navas">Keylor Navas</option>
+							<option value="Javier Hernández">Javier Hernández</option>
+							<option value="Dani Carvajal">Dani Carvajal</option>
+							<option value="Lucas Silva">Lucas Silva</option>
+							<option value="Álvaro Arbeloa">Álvaro Arbeloa</option>
+							<option value="Nacho">Nacho</option>
+							<option value="Luka Modrić">Luka Modrić</option>
+							<option value="Jesé">Jesé</option>
+							<option value="Isco">Isco</option>
+							<option value="Asier Illarramendi">Asier Illarramendi</option>
+							<option value="Fernando Pacheco">Fernando Pacheco</option>n value="volvo">Volvo</option>
+						</select>
+						<br>
+						Other: <input style="width:60%;" type="text" value="" />
+					</td>
+					<td>
+						<img id="addPrediction1"  name="addPrediction" src="add.png" alt="add prediction" style="width:16px;height:16px; cursor:pointer;">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						6
+					</td>
+					<td>
+						Goalkeeper Scores
+					</td>
+					<td>
+					
+					</td>
+					<td>
+						<img id="addPrediction2"  name="addPrediction" src="add.png" alt="add prediction" style="width:16px;height:16px; cursor:pointer;">
+					</td>
+				</tr>				
+				<tr>
+					<td>
+						5
+					</td>
+					<td>
+						Hat-Trick
+					</td>
+					<td>
+						<select>
+							<option value="Iker Casillas">Iker Casillas</option>
+							<option value="Raphaël Varane">Raphaël Varane</option>
+							<option value="Pepe">Pepe</option>
+							<option value="Sergio Ramos">Sergio Ramos</option>
+							<option value="Fábio Coentrão">Fábio Coentrão</option>
+							<option value="Sami Khedira">Sami Khedira</option>
+							<option value="Cristiano Ronaldo">Cristiano Ronaldo</option>
+							<option value="Toni Kroos">Toni Kroos</option>
+							<option value="Karim Benzema">Karim Benzema</option>
+							<option value="James Rodríguez">James Rodríguez</option>
+							<option value="Gareth Bale">Gareth Bale</option>
+							<option value="Marcelo">Marcelo</option>
+							<option value="Keylor Navas">Keylor Navas</option>
+							<option value="Javier Hernández">Javier Hernández</option>
+							<option value="Dani Carvajal">Dani Carvajal</option>
+							<option value="Lucas Silva">Lucas Silva</option>
+							<option value="Álvaro Arbeloa">Álvaro Arbeloa</option>
+							<option value="Nacho">Nacho</option>
+							<option value="Luka Modrić">Luka Modrić</option>
+							<option value="Jesé">Jesé</option>
+							<option value="Isco">Isco</option>
+							<option value="Asier Illarramendi">Asier Illarramendi</option>
+							<option value="Fernando Pacheco">Fernando Pacheco</option>n value="volvo">Volvo</option>
+						</select>
+						<br>
+						Other: <input style="width:60%;" type="text" value="" />
+					</td>
+					<td>
+						<img id="addPrediction3"  name="addPrediction" src="add.png" alt="add prediction" style="width:16px;height:16px; cursor:pointer;">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						5
+					</td>
+					<td>
+						Injured
+					</td>
+					<td>
+						<select>
+							<option value="Iker Casillas">Iker Casillas</option>
+							<option value="Raphaël Varane">Raphaël Varane</option>
+							<option value="Pepe">Pepe</option>
+							<option value="Sergio Ramos">Sergio Ramos</option>
+							<option value="Fábio Coentrão">Fábio Coentrão</option>
+							<option value="Sami Khedira">Sami Khedira</option>
+							<option value="Cristiano Ronaldo">Cristiano Ronaldo</option>
+							<option value="Toni Kroos">Toni Kroos</option>
+							<option value="Karim Benzema">Karim Benzema</option>
+							<option value="James Rodríguez">James Rodríguez</option>
+							<option value="Gareth Bale">Gareth Bale</option>
+							<option value="Marcelo">Marcelo</option>
+							<option value="Keylor Navas">Keylor Navas</option>
+							<option value="Javier Hernández">Javier Hernández</option>
+							<option value="Dani Carvajal">Dani Carvajal</option>
+							<option value="Lucas Silva">Lucas Silva</option>
+							<option value="Álvaro Arbeloa">Álvaro Arbeloa</option>
+							<option value="Nacho">Nacho</option>
+							<option value="Luka Modrić">Luka Modrić</option>
+							<option value="Jesé">Jesé</option>
+							<option value="Isco">Isco</option>
+							<option value="Asier Illarramendi">Asier Illarramendi</option>
+							<option value="Fernando Pacheco">Fernando Pacheco</option>n value="volvo">Volvo</option>
+						</select>
+						<br>
+						Other: <input style="width:60%;" type="text" value="" />
+					</td>
+					<td>
+						<img id="addPrediction4"  name="addPrediction" src="add.png" alt="add prediction" style="width:16px;height:16px; cursor:pointer;">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						5
+					</td>
+					<td>
+						Own goal
+					</td>
+					<td>
+						<select>
+							<option value="Iker Casillas">Iker Casillas</option>
+							<option value="Raphaël Varane">Raphaël Varane</option>
+							<option value="Pepe">Pepe</option>
+							<option value="Sergio Ramos">Sergio Ramos</option>
+							<option value="Fábio Coentrão">Fábio Coentrão</option>
+							<option value="Sami Khedira">Sami Khedira</option>
+							<option value="Cristiano Ronaldo">Cristiano Ronaldo</option>
+							<option value="Toni Kroos">Toni Kroos</option>
+							<option value="Karim Benzema">Karim Benzema</option>
+							<option value="James Rodríguez">James Rodríguez</option>
+							<option value="Gareth Bale">Gareth Bale</option>
+							<option value="Marcelo">Marcelo</option>
+							<option value="Keylor Navas">Keylor Navas</option>
+							<option value="Javier Hernández">Javier Hernández</option>
+							<option value="Dani Carvajal">Dani Carvajal</option>
+							<option value="Lucas Silva">Lucas Silva</option>
+							<option value="Álvaro Arbeloa">Álvaro Arbeloa</option>
+							<option value="Nacho">Nacho</option>
+							<option value="Luka Modrić">Luka Modrić</option>
+							<option value="Jesé">Jesé</option>
+							<option value="Isco">Isco</option>
+							<option value="Asier Illarramendi">Asier Illarramendi</option>
+							<option value="Fernando Pacheco">Fernando Pacheco</option>n value="volvo">Volvo</option>
+						</select>
+						<br>
+						Other: <input style="width:60%;" type="text" value="" />
+					</td>
+					<td>
+						<img id="addPrediction5"  name="addPrediction" src="add.png" alt="add prediction" style="width:16px;height:16px; cursor:pointer;">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						5
+					</td>
+					<td>
+						Score a FK
+					</td>
+					<td>
+						<select>
+							<option value="Iker Casillas">Iker Casillas</option>
+							<option value="Raphaël Varane">Raphaël Varane</option>
+							<option value="Pepe">Pepe</option>
+							<option value="Sergio Ramos">Sergio Ramos</option>
+							<option value="Fábio Coentrão">Fábio Coentrão</option>
+							<option value="Sami Khedira">Sami Khedira</option>
+							<option value="Cristiano Ronaldo">Cristiano Ronaldo</option>
+							<option value="Toni Kroos">Toni Kroos</option>
+							<option value="Karim Benzema">Karim Benzema</option>
+							<option value="James Rodríguez">James Rodríguez</option>
+							<option value="Gareth Bale">Gareth Bale</option>
+							<option value="Marcelo">Marcelo</option>
+							<option value="Keylor Navas">Keylor Navas</option>
+							<option value="Javier Hernández">Javier Hernández</option>
+							<option value="Dani Carvajal">Dani Carvajal</option>
+							<option value="Lucas Silva">Lucas Silva</option>
+							<option value="Álvaro Arbeloa">Álvaro Arbeloa</option>
+							<option value="Nacho">Nacho</option>
+							<option value="Luka Modrić">Luka Modrić</option>
+							<option value="Jesé">Jesé</option>
+							<option value="Isco">Isco</option>
+							<option value="Asier Illarramendi">Asier Illarramendi</option>
+							<option value="Fernando Pacheco">Fernando Pacheco</option>n value="volvo">Volvo</option>
+						</select>
+						<br>
+						Other: <input style="width:60%;" type="text" value="" />
+					</td>
+					<td>
+						<img id="addPrediction6"  name="addPrediction" src="add.png" alt="add prediction" style="width:16px;height:16px; cursor:pointer; ">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						3
+					</td>
+					<td>
+						Final Score
+					</td>
+					<td>
+						<input id="numeric1" style="width:15%;font-size:14px;" type="text" value="" /> - <input id="numeric2" style="width:15%;font-size:14px;" type="text" value="" />
+						
+					</td>
+					<td>
+						<img id="addPrediction7"  name="addPrediction" src="add.png" alt="add prediction" style="width:16px;height:16px; cursor:pointer;">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						3
+					</td>
+					<td>
+						Line-up
+					</td>
+					<td>
+						<select>
+							<option value="Real Madrid">Real Madrid</option>
+							<option value="Opponent">Opponent</option>
+						</select>
+						<br>
+						<textarea style="width: 190px; height: 100px;overflow-y: hidden; overflow-x: hidden;" ></textarea>
+						
+					</td>
+					<td>
+						<img id="addPrediction8"  name="addPrediction" src="add.png" alt="add prediction" style="width:16px;height:16px; cursor:pointer;">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						3
+					</td>
+					<td>
+						Substitution
+					</td>
+					<td>
+						<b>IN:</b>
+						<select>
+							<option value="Iker Casillas">Iker Casillas</option>
+							<option value="Raphaël Varane">Raphaël Varane</option>
+							<option value="Pepe">Pepe</option>
+							<option value="Sergio Ramos">Sergio Ramos</option>
+							<option value="Fábio Coentrão">Fábio Coentrão</option>
+							<option value="Sami Khedira">Sami Khedira</option>
+							<option value="Cristiano Ronaldo">Cristiano Ronaldo</option>
+							<option value="Toni Kroos">Toni Kroos</option>
+							<option value="Karim Benzema">Karim Benzema</option>
+							<option value="James Rodríguez">James Rodríguez</option>
+							<option value="Gareth Bale">Gareth Bale</option>
+							<option value="Marcelo">Marcelo</option>
+							<option value="Keylor Navas">Keylor Navas</option>
+							<option value="Javier Hernández">Javier Hernández</option>
+							<option value="Dani Carvajal">Dani Carvajal</option>
+							<option value="Lucas Silva">Lucas Silva</option>
+							<option value="Álvaro Arbeloa">Álvaro Arbeloa</option>
+							<option value="Nacho">Nacho</option>
+							<option value="Luka Modrić">Luka Modrić</option>
+							<option value="Jesé">Jesé</option>
+							<option value="Isco">Isco</option>
+							<option value="Asier Illarramendi">Asier Illarramendi</option>
+							<option value="Fernando Pacheco">Fernando Pacheco</option>n value="volvo">Volvo</option>
+						</select>
+						<br>
+						other: <input  style="width:40%;font-size:14px;" type="text" value="" />
+						<BR>
+						<b>OUT:</b>
+						<select>
+							<option value="Iker Casillas">Iker Casillas</option>
+							<option value="Raphaël Varane">Raphaël Varane</option>
+							<option value="Pepe">Pepe</option>
+							<option value="Sergio Ramos">Sergio Ramos</option>
+							<option value="Fábio Coentrão">Fábio Coentrão</option>
+							<option value="Sami Khedira">Sami Khedira</option>
+							<option value="Cristiano Ronaldo">Cristiano Ronaldo</option>
+							<option value="Toni Kroos">Toni Kroos</option>
+							<option value="Karim Benzema">Karim Benzema</option>
+							<option value="James Rodríguez">James Rodríguez</option>
+							<option value="Gareth Bale">Gareth Bale</option>
+							<option value="Marcelo">Marcelo</option>
+							<option value="Keylor Navas">Keylor Navas</option>
+							<option value="Javier Hernández">Javier Hernández</option>
+							<option value="Dani Carvajal">Dani Carvajal</option>
+							<option value="Lucas Silva">Lucas Silva</option>
+							<option value="Álvaro Arbeloa">Álvaro Arbeloa</option>
+							<option value="Nacho">Nacho</option>
+							<option value="Luka Modrić">Luka Modrić</option>
+							<option value="Jesé">Jesé</option>
+							<option value="Isco">Isco</option>
+							<option value="Asier Illarramendi">Asier Illarramendi</option>
+							<option value="Fernando Pacheco">Fernando Pacheco</option>n value="volvo">Volvo</option>
+						</select>
+						<br>
+						other: <input  style="width:40%;font-size:14px;" type="text" value="" />
+						
+					</td>
+					<td>
+						<img id="addPrediction9"  name="addPrediction" src="add.png" alt="add prediction" style="width:16px;height:16px; cursor:pointer;">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						3
+					</td>
+					<td>
+						Gets direct red card
+					</td>
+					<td>
+						<select>
+							<option value="Iker Casillas">Iker Casillas</option>
+							<option value="Raphaël Varane">Raphaël Varane</option>
+							<option value="Pepe">Pepe</option>
+							<option value="Sergio Ramos">Sergio Ramos</option>
+							<option value="Fábio Coentrão">Fábio Coentrão</option>
+							<option value="Sami Khedira">Sami Khedira</option>
+							<option value="Cristiano Ronaldo">Cristiano Ronaldo</option>
+							<option value="Toni Kroos">Toni Kroos</option>
+							<option value="Karim Benzema">Karim Benzema</option>
+							<option value="James Rodríguez">James Rodríguez</option>
+							<option value="Gareth Bale">Gareth Bale</option>
+							<option value="Marcelo">Marcelo</option>
+							<option value="Keylor Navas">Keylor Navas</option>
+							<option value="Javier Hernández">Javier Hernández</option>
+							<option value="Dani Carvajal">Dani Carvajal</option>
+							<option value="Lucas Silva">Lucas Silva</option>
+							<option value="Álvaro Arbeloa">Álvaro Arbeloa</option>
+							<option value="Nacho">Nacho</option>
+							<option value="Luka Modrić">Luka Modrić</option>
+							<option value="Jesé">Jesé</option>
+							<option value="Isco">Isco</option>
+							<option value="Asier Illarramendi">Asier Illarramendi</option>
+							<option value="Fernando Pacheco">Fernando Pacheco</option>n value="volvo">Volvo</option>
+						</select>
+						<br>
+						Other: <input style="width:60%;" type="text" value="" />
+					</td>
+					<td>
+						<img id="addPrediction10"  name="addPrediction" src="add.png" alt="add prediction" style="width:16px;height:16px; cursor:pointer; ">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						3
+					</td>
+					<td>
+						Miss a PK
+					</td>
+					<td>
+						<select>
+							<option value="Iker Casillas">Iker Casillas</option>
+							<option value="Raphaël Varane">Raphaël Varane</option>
+							<option value="Pepe">Pepe</option>
+							<option value="Sergio Ramos">Sergio Ramos</option>
+							<option value="Fábio Coentrão">Fábio Coentrão</option>
+							<option value="Sami Khedira">Sami Khedira</option>
+							<option value="Cristiano Ronaldo">Cristiano Ronaldo</option>
+							<option value="Toni Kroos">Toni Kroos</option>
+							<option value="Karim Benzema">Karim Benzema</option>
+							<option value="James Rodríguez">James Rodríguez</option>
+							<option value="Gareth Bale">Gareth Bale</option>
+							<option value="Marcelo">Marcelo</option>
+							<option value="Keylor Navas">Keylor Navas</option>
+							<option value="Javier Hernández">Javier Hernández</option>
+							<option value="Dani Carvajal">Dani Carvajal</option>
+							<option value="Lucas Silva">Lucas Silva</option>
+							<option value="Álvaro Arbeloa">Álvaro Arbeloa</option>
+							<option value="Nacho">Nacho</option>
+							<option value="Luka Modrić">Luka Modrić</option>
+							<option value="Jesé">Jesé</option>
+							<option value="Isco">Isco</option>
+							<option value="Asier Illarramendi">Asier Illarramendi</option>
+							<option value="Fernando Pacheco">Fernando Pacheco</option>n value="volvo">Volvo</option>
+						</select>
+						<br>
+						Other: <input style="width:60%;" type="text" value="" />
+					</td>
+					<td>
+						<img id="addPrediction11"  name="addPrediction" src="add.png" alt="add prediction" style="width:16px;height:16px; cursor:pointer; ">
+					</td>
+				</tr>
+<tr>
+					<td>
+						3
+					</td>
+					<td>
+						Scores a Brace
+					</td>
+					<td>
+						<select>
+							<option value="Iker Casillas">Iker Casillas</option>
+							<option value="Raphaël Varane">Raphaël Varane</option>
+							<option value="Pepe">Pepe</option>
+							<option value="Sergio Ramos">Sergio Ramos</option>
+							<option value="Fábio Coentrão">Fábio Coentrão</option>
+							<option value="Sami Khedira">Sami Khedira</option>
+							<option value="Cristiano Ronaldo">Cristiano Ronaldo</option>
+							<option value="Toni Kroos">Toni Kroos</option>
+							<option value="Karim Benzema">Karim Benzema</option>
+							<option value="James Rodríguez">James Rodríguez</option>
+							<option value="Gareth Bale">Gareth Bale</option>
+							<option value="Marcelo">Marcelo</option>
+							<option value="Keylor Navas">Keylor Navas</option>
+							<option value="Javier Hernández">Javier Hernández</option>
+							<option value="Dani Carvajal">Dani Carvajal</option>
+							<option value="Lucas Silva">Lucas Silva</option>
+							<option value="Álvaro Arbeloa">Álvaro Arbeloa</option>
+							<option value="Nacho">Nacho</option>
+							<option value="Luka Modrić">Luka Modrić</option>
+							<option value="Jesé">Jesé</option>
+							<option value="Isco">Isco</option>
+							<option value="Asier Illarramendi">Asier Illarramendi</option>
+							<option value="Fernando Pacheco">Fernando Pacheco</option>n value="volvo">Volvo</option>
+						</select>
+						<br>
+						Other: <input style="width:60%;" type="text" value="" />
+					</td>
+					<td>
+						<img id="addPrediction12"  name="addPrediction" src="add.png" alt="add prediction" style="width:16px;height:16px; cursor:pointer; ">
+					</td>
+				</tr>	
+				<tr>
+					<td>
+						3
+					</td>
+					<td>
+						Creates +1 Assists
+					</td>
+					<td>
+						<select>
+							<option value="Iker Casillas">Iker Casillas</option>
+							<option value="Raphaël Varane">Raphaël Varane</option>
+							<option value="Pepe">Pepe</option>
+							<option value="Sergio Ramos">Sergio Ramos</option>
+							<option value="Fábio Coentrão">Fábio Coentrão</option>
+							<option value="Sami Khedira">Sami Khedira</option>
+							<option value="Cristiano Ronaldo">Cristiano Ronaldo</option>
+							<option value="Toni Kroos">Toni Kroos</option>
+							<option value="Karim Benzema">Karim Benzema</option>
+							<option value="James Rodríguez">James Rodríguez</option>
+							<option value="Gareth Bale">Gareth Bale</option>
+							<option value="Marcelo">Marcelo</option>
+							<option value="Keylor Navas">Keylor Navas</option>
+							<option value="Javier Hernández">Javier Hernández</option>
+							<option value="Dani Carvajal">Dani Carvajal</option>
+							<option value="Lucas Silva">Lucas Silva</option>
+							<option value="Álvaro Arbeloa">Álvaro Arbeloa</option>
+							<option value="Nacho">Nacho</option>
+							<option value="Luka Modrić">Luka Modrić</option>
+							<option value="Jesé">Jesé</option>
+							<option value="Isco">Isco</option>
+							<option value="Asier Illarramendi">Asier Illarramendi</option>
+							<option value="Fernando Pacheco">Fernando Pacheco</option>n value="volvo">Volvo</option>
+						</select>
+						<br>
+						Other: <input style="width:60%;" type="text" value="" />
+					</td>
+					<td>
+						<img id="addPrediction13"  name="addPrediction" src="add.png" alt="add prediction" style="width:16px;height:16px; cursor:pointer; ">
+					</td>
+				</tr>	
+				<tr>
+					<td>
+						3
+					</td>
+					<td>
+						As a defender scores a goal
+					</td>
+					<td>
+						<select>
+							<option value="Iker Casillas">Iker Casillas</option>
+							<option value="Raphaël Varane">Raphaël Varane</option>
+							<option value="Pepe">Pepe</option>
+							<option value="Sergio Ramos">Sergio Ramos</option>
+							<option value="Fábio Coentrão">Fábio Coentrão</option>
+							<option value="Sami Khedira">Sami Khedira</option>
+							<option value="Cristiano Ronaldo">Cristiano Ronaldo</option>
+							<option value="Toni Kroos">Toni Kroos</option>
+							<option value="Karim Benzema">Karim Benzema</option>
+							<option value="James Rodríguez">James Rodríguez</option>
+							<option value="Gareth Bale">Gareth Bale</option>
+							<option value="Marcelo">Marcelo</option>
+							<option value="Keylor Navas">Keylor Navas</option>
+							<option value="Javier Hernández">Javier Hernández</option>
+							<option value="Dani Carvajal">Dani Carvajal</option>
+							<option value="Lucas Silva">Lucas Silva</option>
+							<option value="Álvaro Arbeloa">Álvaro Arbeloa</option>
+							<option value="Nacho">Nacho</option>
+							<option value="Luka Modrić">Luka Modrić</option>
+							<option value="Jesé">Jesé</option>
+							<option value="Isco">Isco</option>
+							<option value="Asier Illarramendi">Asier Illarramendi</option>
+							<option value="Fernando Pacheco">Fernando Pacheco</option>n value="volvo">Volvo</option>
+						</select>
+						<br>
+						Other: <input style="width:60%;" type="text" value="" />
+					</td>
+					<td>
+						<img id="addPrediction14"  name="addPrediction" src="add.png" alt="add prediction" style="width:16px;height:16px; cursor:pointer; ">
+					</td>
+				</tr>	
+				<tr>
+					<td>
+						2
+					</td>
+					<td>
+						Half-Time Result
+					</td>
+					<td>
+						<input id="numeric3" style="width:15%;font-size:14px;" type="text" value="" /> - <input id="numeric4" style="width:15%;font-size:14px;" type="text" value="" />
+						
+					</td>
+					<td>
+						<img id="addPrediction15"  name="addPrediction" src="add.png" alt="add prediction" style="width:16px;height:16px; cursor:pointer;">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						2
+					</td>
+					<td>
+						Scores a PK
+					</td>
+					<td>
+						<select>
+							<option value="Iker Casillas">Iker Casillas</option>
+							<option value="Raphaël Varane">Raphaël Varane</option>
+							<option value="Pepe">Pepe</option>
+							<option value="Sergio Ramos">Sergio Ramos</option>
+							<option value="Fábio Coentrão">Fábio Coentrão</option>
+							<option value="Sami Khedira">Sami Khedira</option>
+							<option value="Cristiano Ronaldo">Cristiano Ronaldo</option>
+							<option value="Toni Kroos">Toni Kroos</option>
+							<option value="Karim Benzema">Karim Benzema</option>
+							<option value="James Rodríguez">James Rodríguez</option>
+							<option value="Gareth Bale">Gareth Bale</option>
+							<option value="Marcelo">Marcelo</option>
+							<option value="Keylor Navas">Keylor Navas</option>
+							<option value="Javier Hernández">Javier Hernández</option>
+							<option value="Dani Carvajal">Dani Carvajal</option>
+							<option value="Lucas Silva">Lucas Silva</option>
+							<option value="Álvaro Arbeloa">Álvaro Arbeloa</option>
+							<option value="Nacho">Nacho</option>
+							<option value="Luka Modrić">Luka Modrić</option>
+							<option value="Jesé">Jesé</option>
+							<option value="Isco">Isco</option>
+							<option value="Asier Illarramendi">Asier Illarramendi</option>
+							<option value="Fernando Pacheco">Fernando Pacheco</option>n value="volvo">Volvo</option>
+						</select>
+						<br>
+						Other: <input style="width:60%;" type="text" value="" />
+					</td>
+					<td>
+						<img id="addPrediction16"  name="addPrediction" src="add.png" alt="add prediction" style="width:16px;height:16px; cursor:pointer; ">
+					</td>
+				</tr>		
+				<tr>
+					<td>
+						2
+					</td>
+					<td>
+						Scores a Header
+					</td>
+					<td>
+						<select>
+							<option value="Iker Casillas">Iker Casillas</option>
+							<option value="Raphaël Varane">Raphaël Varane</option>
+							<option value="Pepe">Pepe</option>
+							<option value="Sergio Ramos">Sergio Ramos</option>
+							<option value="Fábio Coentrão">Fábio Coentrão</option>
+							<option value="Sami Khedira">Sami Khedira</option>
+							<option value="Cristiano Ronaldo">Cristiano Ronaldo</option>
+							<option value="Toni Kroos">Toni Kroos</option>
+							<option value="Karim Benzema">Karim Benzema</option>
+							<option value="James Rodríguez">James Rodríguez</option>
+							<option value="Gareth Bale">Gareth Bale</option>
+							<option value="Marcelo">Marcelo</option>
+							<option value="Keylor Navas">Keylor Navas</option>
+							<option value="Javier Hernández">Javier Hernández</option>
+							<option value="Dani Carvajal">Dani Carvajal</option>
+							<option value="Lucas Silva">Lucas Silva</option>
+							<option value="Álvaro Arbeloa">Álvaro Arbeloa</option>
+							<option value="Nacho">Nacho</option>
+							<option value="Luka Modrić">Luka Modrić</option>
+							<option value="Jesé">Jesé</option>
+							<option value="Isco">Isco</option>
+							<option value="Asier Illarramendi">Asier Illarramendi</option>
+							<option value="Fernando Pacheco">Fernando Pacheco</option>n value="volvo">Volvo</option>
+						</select>
+						<br>
+						Other: <input style="width:60%;" type="text" value="" />
+					</td>
+					<td>
+						<img id="addPrediction17"  name="addPrediction" src="add.png" alt="add prediction" style="width:16px;height:16px; cursor:pointer; ">
+					</td>
+				</tr>	
+				<tr>
+					<td>
+						2
+					</td>
+					<td>
+						Scores One Goal
+					</td>
+					<td>
+						<select>
+							<option value="Iker Casillas">Iker Casillas</option>
+							<option value="Raphaël Varane">Raphaël Varane</option>
+							<option value="Pepe">Pepe</option>
+							<option value="Sergio Ramos">Sergio Ramos</option>
+							<option value="Fábio Coentrão">Fábio Coentrão</option>
+							<option value="Sami Khedira">Sami Khedira</option>
+							<option value="Cristiano Ronaldo">Cristiano Ronaldo</option>
+							<option value="Toni Kroos">Toni Kroos</option>
+							<option value="Karim Benzema">Karim Benzema</option>
+							<option value="James Rodríguez">James Rodríguez</option>
+							<option value="Gareth Bale">Gareth Bale</option>
+							<option value="Marcelo">Marcelo</option>
+							<option value="Keylor Navas">Keylor Navas</option>
+							<option value="Javier Hernández">Javier Hernández</option>
+							<option value="Dani Carvajal">Dani Carvajal</option>
+							<option value="Lucas Silva">Lucas Silva</option>
+							<option value="Álvaro Arbeloa">Álvaro Arbeloa</option>
+							<option value="Nacho">Nacho</option>
+							<option value="Luka Modrić">Luka Modrić</option>
+							<option value="Jesé">Jesé</option>
+							<option value="Isco">Isco</option>
+							<option value="Asier Illarramendi">Asier Illarramendi</option>
+							<option value="Fernando Pacheco">Fernando Pacheco</option>n value="volvo">Volvo</option>
+						</select>
+						<br>
+						Other: <input style="width:60%;" type="text" value="" />
+					</td>
+					<td>
+						<img id="addPrediction18"  name="addPrediction" src="add.png" alt="add prediction" style="width:16px;height:16px; cursor:pointer; ">
+					</td>
+				</tr>	
+				<tr>
+					<td>
+						2
+					</td>
+					<td>
+						Creates an Assist
+					</td>
+					<td>
+						<select>
+							<option value="Iker Casillas">Iker Casillas</option>
+							<option value="Raphaël Varane">Raphaël Varane</option>
+							<option value="Pepe">Pepe</option>
+							<option value="Sergio Ramos">Sergio Ramos</option>
+							<option value="Fábio Coentrão">Fábio Coentrão</option>
+							<option value="Sami Khedira">Sami Khedira</option>
+							<option value="Cristiano Ronaldo">Cristiano Ronaldo</option>
+							<option value="Toni Kroos">Toni Kroos</option>
+							<option value="Karim Benzema">Karim Benzema</option>
+							<option value="James Rodríguez">James Rodríguez</option>
+							<option value="Gareth Bale">Gareth Bale</option>
+							<option value="Marcelo">Marcelo</option>
+							<option value="Keylor Navas">Keylor Navas</option>
+							<option value="Javier Hernández">Javier Hernández</option>
+							<option value="Dani Carvajal">Dani Carvajal</option>
+							<option value="Lucas Silva">Lucas Silva</option>
+							<option value="Álvaro Arbeloa">Álvaro Arbeloa</option>
+							<option value="Nacho">Nacho</option>
+							<option value="Luka Modrić">Luka Modrić</option>
+							<option value="Jesé">Jesé</option>
+							<option value="Isco">Isco</option>
+							<option value="Asier Illarramendi">Asier Illarramendi</option>
+							<option value="Fernando Pacheco">Fernando Pacheco</option>n value="volvo">Volvo</option>
+						</select>
+						<br>
+						Other: <input style="width:60%;" type="text" value="" />
+					</td>
+					<td>
+						<img id="addPrediction19"  name="addPrediction" src="add.png" alt="add prediction" style="width:16px;height:16px; cursor:pointer; ">
+					</td>
+				</tr>					
+				<tr>
+					<td>
+						2
+					</td>
+					<td>
+						Gets a Clean Sheet
+					</td>
+					<td>
+						<select>
+							<option value="Real Madrid">Real Madrid</option>
+							<option value="Opponent">Opponent</option>
+						</select>
+					</td>
+					<td>
+						<img id="addPrediction20"  name="addPrediction" src="add.png" alt="add prediction" style="width:16px;height:16px; cursor:pointer; ">
+					</td>
+				</tr>	
+				<tr>
+					<td>
+						1
+					</td>
+					<td>
+						Wins the game
+					</td>
+					<td>
+						<select>
+							<option value="Real Madrid">Real Madrid</option>
+							<option value="Opponent">Opponent</option>
+						</select>
+					</td>
+					<td>
+						<img id="addPrediction21"  name="addPrediction" src="add.png" alt="add prediction" style="width:16px;height:16px; cursor:pointer; ">
+					</td>
+				</tr>	
+				<tr>
+					<td>
+						1
+					</td>
+					<td>
+						Will Score
+					</td>
+					<td>
+						<select>
+							<option value="Real Madrid">Real Madrid</option>
+							<option value="Opponent">Opponent</option>
+						</select>
+					</td>
+					<td>
+						<img id="addPrediction22"  name="addPrediction" src="add.png" alt="add prediction" style="width:16px;height:16px; cursor:pointer; ">
+					</td>
+				</tr>				
+				<tr>
+					<td>
+						1
+					</td>
+					<td>
+						Will Score
+					</td>
+					<td>
+						<select>
+							<option value="Real Madrid">Real Madrid</option>
+							<option value="Opponent">Opponent</option>
+						</select>
+						<br>
+						In
+						<select>
+							<option value="1st Half">1st Half</option>
+							<option value="2nd Half">2nd Half</option>
+						</select>
+					</td>
+					<td>
+						<img id="addPrediction23"  name="addPrediction" src="add.png" alt="add prediction" style="width:16px;height:16px; cursor:pointer; ">
+					</td>
+				</tr>					
+				<tr>
+					<td>
+						1
+					</td>
+					<td>
+						Scores
+					</td>
+					<td>
+						<select>
+							<option value="Iker Casillas">Iker Casillas</option>
+							<option value="Raphaël Varane">Raphaël Varane</option>
+							<option value="Pepe">Pepe</option>
+							<option value="Sergio Ramos">Sergio Ramos</option>
+							<option value="Fábio Coentrão">Fábio Coentrão</option>
+							<option value="Sami Khedira">Sami Khedira</option>
+							<option value="Cristiano Ronaldo">Cristiano Ronaldo</option>
+							<option value="Toni Kroos">Toni Kroos</option>
+							<option value="Karim Benzema">Karim Benzema</option>
+							<option value="James Rodríguez">James Rodríguez</option>
+							<option value="Gareth Bale">Gareth Bale</option>
+							<option value="Marcelo">Marcelo</option>
+							<option value="Keylor Navas">Keylor Navas</option>
+							<option value="Javier Hernández">Javier Hernández</option>
+							<option value="Dani Carvajal">Dani Carvajal</option>
+							<option value="Lucas Silva">Lucas Silva</option>
+							<option value="Álvaro Arbeloa">Álvaro Arbeloa</option>
+							<option value="Nacho">Nacho</option>
+							<option value="Luka Modrić">Luka Modrić</option>
+							<option value="Jesé">Jesé</option>
+							<option value="Isco">Isco</option>
+							<option value="Asier Illarramendi">Asier Illarramendi</option>
+							<option value="Fernando Pacheco">Fernando Pacheco</option>n value="volvo">Volvo</option>
+						</select>
+						<br>
+						Other: <input style="width:60%;" type="text" value="" />
+					</td>
+					<td>
+						<img id="addPrediction24"  name="addPrediction" src="add.png" alt="add prediction" style="width:16px;height:16px; cursor:pointer; ">
+					</td>
+				</tr>	
+				<tr>
+					<td>
+						1
+					</td>
+					<td>
+						Sub IN
+					</td>
+					<td>
+						<select>
+							<option value="Iker Casillas">Iker Casillas</option>
+							<option value="Raphaël Varane">Raphaël Varane</option>
+							<option value="Pepe">Pepe</option>
+							<option value="Sergio Ramos">Sergio Ramos</option>
+							<option value="Fábio Coentrão">Fábio Coentrão</option>
+							<option value="Sami Khedira">Sami Khedira</option>
+							<option value="Cristiano Ronaldo">Cristiano Ronaldo</option>
+							<option value="Toni Kroos">Toni Kroos</option>
+							<option value="Karim Benzema">Karim Benzema</option>
+							<option value="James Rodríguez">James Rodríguez</option>
+							<option value="Gareth Bale">Gareth Bale</option>
+							<option value="Marcelo">Marcelo</option>
+							<option value="Keylor Navas">Keylor Navas</option>
+							<option value="Javier Hernández">Javier Hernández</option>
+							<option value="Dani Carvajal">Dani Carvajal</option>
+							<option value="Lucas Silva">Lucas Silva</option>
+							<option value="Álvaro Arbeloa">Álvaro Arbeloa</option>
+							<option value="Nacho">Nacho</option>
+							<option value="Luka Modrić">Luka Modrić</option>
+							<option value="Jesé">Jesé</option>
+							<option value="Isco">Isco</option>
+							<option value="Asier Illarramendi">Asier Illarramendi</option>
+							<option value="Fernando Pacheco">Fernando Pacheco</option>n value="volvo">Volvo</option>
+						</select>
+						<br>
+						Other: <input style="width:60%;" type="text" value="" />
+					</td>
+					<td>
+						<img id="addPrediction25"  name="addPrediction" src="add.png" alt="add prediction" style="width:16px;height:16px; cursor:pointer; ">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						1
+					</td>
+					<td>
+						Sub OUT
+					</td>
+					<td>
+						<select>
+							<option value="Iker Casillas">Iker Casillas</option>
+							<option value="Raphaël Varane">Raphaël Varane</option>
+							<option value="Pepe">Pepe</option>
+							<option value="Sergio Ramos">Sergio Ramos</option>
+							<option value="Fábio Coentrão">Fábio Coentrão</option>
+							<option value="Sami Khedira">Sami Khedira</option>
+							<option value="Cristiano Ronaldo">Cristiano Ronaldo</option>
+							<option value="Toni Kroos">Toni Kroos</option>
+							<option value="Karim Benzema">Karim Benzema</option>
+							<option value="James Rodríguez">James Rodríguez</option>
+							<option value="Gareth Bale">Gareth Bale</option>
+							<option value="Marcelo">Marcelo</option>
+							<option value="Keylor Navas">Keylor Navas</option>
+							<option value="Javier Hernández">Javier Hernández</option>
+							<option value="Dani Carvajal">Dani Carvajal</option>
+							<option value="Lucas Silva">Lucas Silva</option>
+							<option value="Álvaro Arbeloa">Álvaro Arbeloa</option>
+							<option value="Nacho">Nacho</option>
+							<option value="Luka Modrić">Luka Modrić</option>
+							<option value="Jesé">Jesé</option>
+							<option value="Isco">Isco</option>
+							<option value="Asier Illarramendi">Asier Illarramendi</option>
+							<option value="Fernando Pacheco">Fernando Pacheco</option>n value="volvo">Volvo</option>
+						</select>
+						<br>
+						Other: <input style="width:60%;" type="text" value="" />
+					</td>
+					<td>
+						<img id="addPrediction26"  name="addPrediction" src="add.png" alt="add prediction" style="width:16px;height:16px; cursor:pointer; ">
+					</td>
+				</tr>					
+				<tr>
+					<td>
+						1
+					</td>
+					<td>
+						Gets Yellow Card(s)
+					</td>
+					<td>
+						<select>
+							<option value="Iker Casillas">Iker Casillas</option>
+							<option value="Raphaël Varane">Raphaël Varane</option>
+							<option value="Pepe">Pepe</option>
+							<option value="Sergio Ramos">Sergio Ramos</option>
+							<option value="Fábio Coentrão">Fábio Coentrão</option>
+							<option value="Sami Khedira">Sami Khedira</option>
+							<option value="Cristiano Ronaldo">Cristiano Ronaldo</option>
+							<option value="Toni Kroos">Toni Kroos</option>
+							<option value="Karim Benzema">Karim Benzema</option>
+							<option value="James Rodríguez">James Rodríguez</option>
+							<option value="Gareth Bale">Gareth Bale</option>
+							<option value="Marcelo">Marcelo</option>
+							<option value="Keylor Navas">Keylor Navas</option>
+							<option value="Javier Hernández">Javier Hernández</option>
+							<option value="Dani Carvajal">Dani Carvajal</option>
+							<option value="Lucas Silva">Lucas Silva</option>
+							<option value="Álvaro Arbeloa">Álvaro Arbeloa</option>
+							<option value="Nacho">Nacho</option>
+							<option value="Luka Modrić">Luka Modrić</option>
+							<option value="Jesé">Jesé</option>
+							<option value="Isco">Isco</option>
+							<option value="Asier Illarramendi">Asier Illarramendi</option>
+							<option value="Fernando Pacheco">Fernando Pacheco</option>n value="volvo">Volvo</option>
+						</select>
+						<br>
+						Other: <input style="width:60%;" type="text" value="" />
+					</td>
+					<td>
+						<img id="addPrediction27"  name="addPrediction" src="add.png" alt="add prediction" style="width:16px;height:16px; cursor:pointer; ">
+					</td>
+				</tr>
+								<tr>
+					<td>
+						1
+					</td>
+					<td>
+						More Than 3 Goals Total
+					</td>
+					<td>
+					</td>
+					<td>
+						<img id="addPrediction28"  name="addPrediction" src="add.png" alt="add prediction" style="width:16px;height:16px; cursor:pointer; ">
+					</td>
+				</tr>
+			</table>
+		
+		</div>
+		<div id="middle_div" class="right_panel">
+			<table id="predictions_made">
+			<tbody>
+				<tr>
+					<td>No predictions added yet</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		<div id="right_div" class="comment_panel">
+			
+		</div>
+	</div>
+	
+	
+	
+	
+  </body>
+</html>
+

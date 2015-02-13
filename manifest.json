@@ -1,0 +1,17 @@
+{
+  "name": "r/RealMadrid comment builder",
+  "version": "1.0",
+  "description": "Opens a page where a comment can be build to participate on the weekly contest",
+  "background": {
+    "persistent": false,
+    "scripts": ["script.js"]
+  },
+  "browser_action": {
+    "default_icon": "Real_Madrid.png",
+    "default_title": "Build Comment"
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "manifest_version": 2
+}
